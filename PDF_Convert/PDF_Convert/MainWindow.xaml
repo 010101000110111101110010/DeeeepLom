@@ -1,0 +1,21 @@
+﻿<Window x:Class="PDF_Convert.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PDF_Convert"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="720" Width="1280">
+    <Grid>
+        <Button Content="All>>PDF" HorizontalAlignment="Left" Margin="238,245,0,0" VerticalAlignment="Top" FontSize="36" Width="225" Height="200" Click="Button_Click"/>
+        <Button Content="PDF>>All" HorizontalAlignment="Left" Margin="542,245,0,0" VerticalAlignment="Top" FontSize="36" Width="225" Height="200" Click="Button_Click_1"/>
+        <Button Content="Split" HorizontalAlignment="Left" Margin="840,245,0,0" VerticalAlignment="Top" FontSize="36" Width="225" Height="200"/>
+        <ComboBox Name="cbForm" HorizontalAlignment="Left" Margin="592,218,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0">
+            <ComboBoxItem Content=".jpeg" HorizontalAlignment="Left" Width="118"/>
+            <ComboBoxItem Content=".docx" HorizontalAlignment="Left" Width="118"/>
+            <ComboBoxItem Content=".doc" HorizontalAlignment="Left" Width="118"/>
+            <ComboBoxItem Content=".txt" HorizontalAlignment="Left" Width="118"/>
+        </ComboBox>
+
+    </Grid>
+</Window>
