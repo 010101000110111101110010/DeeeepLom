@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Microsoft.Win32;
 using SautinSoft.Document;
+using System.Threading;
+using System.ComponentModel;
 
 namespace PDF_Convert
 {
@@ -23,46 +25,55 @@ namespace PDF_Convert
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        public void Button_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFile = new OpenFileDialog();
-            string path;
-            openFile.Filter = "Jpeg Files (*.jpg)|*.jpg";
+            openFile.Filter = "All files |*.jpg;*.docx;*.txt;*.doc";
             if (openFile.ShowDialog() == true)
             {
-                path = openFile.FileName;
-                DocumentCore dc = DocumentCore.Load($@"{path}");
-                dc.Save($@"{System.IO.Path.GetDirectoryName(path)}\{System.IO.Path.GetFileNameWithoutExtension(path)}AfterConvert.pdf");
-                MessageBox.Show("Файл был конвертирован и сохранён в смежную с выбраным файлом папку");
+                tbPath.Text = openFile.FileName;
+                
             }
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        public void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFile = new OpenFileDialog();
-            string path;
-            openFile.Filter = "DOCK Files (*.docx)|*.docx| TXT Files (*.txt)|*.txt| DOC Files (*.doc)|*.doc";
-            if (openFile.ShowDialog() == true)
+            string pathSave;
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            if (saveFileDialog.ShowDialog() == true)
             {
-                path = openFile.FileName;
-                DocumentCore dc = DocumentCore.Load($@"{path}");
-                dc.Save($@"{System.IO.Path.GetDirectoryName(path)}\{System.IO.Path.GetFileNameWithoutExtension(path)}AfterConvert.pdf");
-                MessageBox.Show("Файл был конвертирован и сохранён в смежную с выбраным файлом папку");
+                DocumentCore dc = DocumentCore.Load($@"{tbPath.Text}");
+                pathSave = saveFileDialog.FileName;
+                PB.Visibility = Visibility.Visible;
+                dc.Save($@"{pathSave}.pdf");
+
+                BackgroundWorker worker = new BackgroundWorker();
+                worker.WorkerReportsProgress = true;
+                worker.DoWork += worker_DoWork;
+                worker.ProgressChanged += worker_ProgressChanged;
+                worker.RunWorkerAsync();
+                //if (worker.) PB.Visibility = Visibility.Hidden;
             }
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+
+
+
+        void worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            OpenFileDialog openFile = new OpenFileDialog();
-            string path;
-            openFile.Filter = "XLSX Files (*.xlsx)|*.xlsx";
-            if (openFile.ShowDialog() == true)
+            for (int i = 0; i <= 100; i++)
             {
-                path = openFile.FileName;
-                DocumentCore dc = DocumentCore.Load($@"{path}");
-                dc.Save($@"{System.IO.Path.GetDirectoryName(path)}\{System.IO.Path.GetFileNameWithoutExtension(path)}AfterConvert.pdf");
-                MessageBox.Show("Файл был конвертирован и сохранён в смежную с выбраным файлом папку");
+                (sender as BackgroundWorker).ReportProgress(i);
+                Thread.Sleep(35);
             }
+            
+        }
+
+
+
+        void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            PB.Value = e.ProgressPercentage;
         }
     }
 }

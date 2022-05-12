@@ -29,16 +29,19 @@ namespace PDF_Convert
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFile = new OpenFileDialog();
-            string path;
-            openFile.Filter = "Jpeg Files (*.jpg)|*.jpg| DOCK Files (*.docx)|*.docx| TXT Files (*.txt)|*.txt| DOC Files (*.doc)|*.doc| XLSX Files (*.xlsx)|*.xlsx";
-            if (openFile.ShowDialog() == true)
-            {
-                path = openFile.FileName;
-                DocumentCore dc = DocumentCore.Load($@"{path}");
-                dc.Save($@"{System.IO.Path.GetDirectoryName(path)}\{System.IO.Path.GetFileNameWithoutExtension(path)}AfterConvert.pdf");
-                MessageBox.Show("Файл был конвертирован и сохранён в смежную с выбраным файлом папку");
-            }
+            All2PDF pd = new All2PDF();
+            pd.Show();
+            this.Close();
+            //OpenFileDialog openFile = new OpenFileDialog();
+            //string path;
+            //openFile.Filter = "Jpeg Files (*.jpg)|*.jpg| DOCK Files (*.docx)|*.docx| TXT Files (*.txt)|*.txt| DOC Files (*.doc)|*.doc| XLSX Files (*.xlsx)|*.xlsx";
+            //if (openFile.ShowDialog() == true)
+            //{
+            //    path = openFile.FileName;
+            //    DocumentCore dc = DocumentCore.Load($@"{path}");
+            //    dc.Save($@"{System.IO.Path.GetDirectoryName(path)}\{System.IO.Path.GetFileNameWithoutExtension(path)}AfterConvert.pdf");
+            //    MessageBox.Show("Файл был конвертирован и сохранён в смежную с выбраным файлом папку");
+            //}
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

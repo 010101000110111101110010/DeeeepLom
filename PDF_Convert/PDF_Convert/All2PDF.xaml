@@ -7,9 +7,14 @@
         mc:Ignorable="d"
         Title="All2PDF" Height="450" Width="800">
     <Grid>
-        <Button Content="Изображение в PDF" HorizontalAlignment="Left" Margin="50,35,0,0" VerticalAlignment="Top" Width="197" Click="Button_Click" Height="160"/>
-        <Button Content="Текст в PDF" HorizontalAlignment="Left" Margin="303,35,0,0" VerticalAlignment="Top" Width="197" Height="160" Click="Button_Click_1"/>
-        <Button Content="Таблицу в PDF" HorizontalAlignment="Left" Margin="556,35,0,0" VerticalAlignment="Top" Width="197" Height="160" Click="Button_Click_2"/>
+        <Button Content="" HorizontalAlignment="Left" Margin="44,21,0,0" VerticalAlignment="Top" Width="22" Click="Button_Click" Height="22" BorderBrush="{x:Null}">
+            <Button.Background>
+                <ImageBrush ImageSource="Path.png"/>
+            </Button.Background>
+        </Button>
+        <TextBox x:Name="tbPath" HorizontalAlignment="Left" Height="19" Margin="71,24,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="340"/>
+        <Button Content="Конвертировать" HorizontalAlignment="Left" Margin="44,48,0,0" VerticalAlignment="Top" Width="97" Click="Button_Click_1"/>
+        <ProgressBar x:Name="PB" HorizontalAlignment="Left" Minimum="0" Maximum="100" Height="20" Margin="146,48,0,0" VerticalAlignment="Top" Width="161" Visibility="Hidden"/>
 
     </Grid>
 </Window>
